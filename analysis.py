@@ -1,19 +1,24 @@
-# TODO: Add a dictionary of common TCP ports and their likely services.
-#
-# Example:
-# 22 -> SSH
-# 80 -> HTTP
-# 443 -> HTTPS
-
-COMMON_SERVICES = {
-    # TODO
-}
-
-
 def analyse_results(results):
-    # TODO:
-    # Read the ports discovered by recon.py.
-    # Identify common services.
-    # Add service information to results["services"].
-    # Return the updated results.
-    pass
+    known_services = {
+        21: "FTP",
+        22: "SSH",
+        23: "Telnet",
+        25: "SMTP",
+        53: "DNS",
+        80: "HTTP",
+        110: "POP3",
+        135: "RPC",
+        139: "NetBIOS",
+        443: "HTTPS",
+        445: "SMB",
+        3306: "MySQL",
+        3389: "RDP",
+    }
+
+    for port in results["ports"]:
+        if port in known_services:
+            results["services"][port] = known_services[port]
+        else:
+            results["services"][port] = "Unknown"
+
+    return results

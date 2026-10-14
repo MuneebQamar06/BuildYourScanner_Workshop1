@@ -2,20 +2,18 @@ from recon import run_recon
 from analysis import analyse_results
 from report import generate_report
 
-
 def main():
-    # TODO: Get the target from the user.
+    target = input("Enter target IP or hostname: ")
 
-    # TODO: Create the shared results dictionary.
-    # It should contain:
-    # target, ports, services
+    results = {
+        "target": target,
+        "ports": [],
+        "services": {}
+    }
 
-    # TODO: Pass results through the reconnaissance stage.
-
-    # TODO: Pass results through the analysis stage.
-
-    # TODO: Generate the final report.
-
+    results = run_recon(target, results)
+    results = analyse_results(results)
+    generate_report(results)
 
 if __name__ == "__main__":
     main()
